@@ -1,0 +1,21 @@
+{
+  "name": "fuzzy_file_finder",
+  "version": "0.1.0",
+  "description": "A JavaScript/node.js implementation of Jamis Buck's fuzzy_file_finder",
+  "homepage": "http://github.com/puls/fuzzy_file_finder.js",
+  "author": "Jim Puls <jim@nondifferentiable.com> (http://nondifferentiable.com)",
+  "main": "lib/fuzzy_file_finder.js",
+  "repository": {
+    "type": "git",
+    "url" : "http://github.com/puls/fuzzy_file_finder.js.git"
+  },
+  "dependencies": {
+    "underscore": "*"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "licenses": [{
+    "type": "MIT"
+  }]
+}
