@@ -9,7 +9,7 @@ module.exports = (directory, pattern, matchCallback, finalCallback) ->
     waitingFiles += 1
     fs.readdir root, (error, files) ->
       waitingFiles -= 1
-      for filename in files
+      files.forEach (filename) ->
         return if filename[0] == '.'
         waitingFiles += 1
         filename = path.join root, filename
@@ -82,22 +82,23 @@ module.exports = (directory, pattern, matchCallback, finalCallback) ->
       false
   
   makePattern = (part) ->
-    fun = (pattern, character) ->
+    charToPattern = (pattern, character) ->
       pattern += '([^/]*?)' if pattern.length
       pattern += '(' + character + ')'
-    part.split('').reduce fun, ''
+    part.split('').reduce charToPattern, ''
 
   pattern = pattern.replace(/ /g, '')
   parts = pattern.split '/'
   parts.push '' if pattern.match /\/$/
   filePart = parts.pop()
-  if parts.length
-    pathRegex = new RegExp '^(.*?)' + parts.map(makePattern).join('(.*?/.*?)') + '(.*?)$', 'i'
   
+  pathRegex = new RegExp '^(.*?)' + parts.map(makePattern).join('(.*?/.*?)') + '(.*?)$', 'i' if parts.length
   fileRegex = /^(.*?)#{makePattern(filePart)}(.*)$/i
+
   listFiles directory, 1, (filename, segments) ->
     pathMatch = matchPath filename, segments
     if !pathMatch.missed
+      console.log('trying to match ' + filename);
       fileMatch = matchFile filename, pathMatch
       matchCallback fileMatch if fileMatch
-      finalCallback() if waitingFiles == 0
+      finalCallback() if waitingFiles == 0 and finalCallback?
