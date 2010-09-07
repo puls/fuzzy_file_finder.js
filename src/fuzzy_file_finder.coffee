@@ -98,7 +98,6 @@ module.exports = (directory, pattern, matchCallback, finalCallback) ->
   listFiles directory, 1, (filename, segments) ->
     pathMatch = matchPath filename, segments
     if !pathMatch.missed
-      console.log('trying to match ' + filename);
       fileMatch = matchFile filename, pathMatch
       matchCallback fileMatch if fileMatch
       finalCallback() if waitingFiles == 0 and finalCallback?
