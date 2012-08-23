@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/puls/fuzzy_file_finder.js.png)](http://travis-ci.org/puls/fuzzy_file_finder.js)
 # `fuzzy_file_finder.js`
 
 `fuzzy_file_finder.js` is an almost direct JavaScript port of [Jamis Buck's Ruby FuzzyFileFinder](http://github.com/jamis/fuzzy_file_finder).
